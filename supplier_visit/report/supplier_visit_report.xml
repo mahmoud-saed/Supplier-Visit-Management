@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Supplier Visit Summary Report -->
+        <record id="action_supplier_visit_summary_report" model="ir.actions.report">
+            <field name="name">Supplier Visit Summary</field>
+            <field name="model">supplier.visit.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">supplier_visit.supplier_visit_summary_report</field>
+            <field name="report_file">supplier_visit.supplier_visit_summary_report</field>
+            <field name="print_report_name">'Supplier Visit Summary - %s' % (object.supplier_name or 'All Suppliers')</field>
+            <field name="binding_model_id" ref="model_supplier_visit"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo> 

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="supplier_visits_page" name="Supplier Visits">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-center mb-4">Supplier Visits Overview</h1>
+                        <p class="text-center text-muted mb-5">
+                            Track and monitor supplier visit activities across all our business partners.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fa fa-building"></i>
+                                    Suppliers and Visit Information
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Supplier Name</th>
+                                                <th>Last Visit Date</th>
+                                                <th>Total Visits</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="suppliers" t-as="supplier_data">
+                                                <tr>
+                                                    <td>
+                                                        <strong t-esc="supplier_data['supplier'].name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="supplier_data['last_visit_date']">
+                                                            <span t-esc="supplier_data['last_visit_date']" t-options='{"widget": "date"}'/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span class="text-muted">No visits recorded</span>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-info" t-esc="supplier_data['visit_count']"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="supplier_data['last_visit_date']">
+                                                            <span class="badge badge-success">Active</span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span class="badge badge-warning">No Recent Visits</span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <t t-if="pagination['total_pages'] > 1">
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <nav aria-label="Supplier visits pagination">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" t-attf-class="#{pagination['has_prev'] and '' or 'disabled'}">
+                                        <a class="page-link" t-attf-href="/supplier-visits?page=#{pagination['prev_page']}" t-attf-aria-label="Previous">
+                                            <span aria-hidden="true">&#171;</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <t t-foreach="range(1, pagination['total_pages'] + 1)" t-as="page_num">
+                                        <li class="page-item" t-attf-class="#{page_num == pagination['page'] and 'active' or ''}">
+                                            <a class="page-link" t-attf-href="/supplier-visits?page=#{page_num}" t-esc="page_num"/>
+                                        </li>
+                                    </t>
+                                    
+                                    <li class="page-item" t-attf-class="#{pagination['has_next'] and '' or 'disabled'}">
+                                        <a class="page-link" t-attf-href="/supplier-visits?page=#{pagination['next_page']}" t-attf-aria-label="Next">
+                                            <span aria-hidden="true">&#187;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </t>
+
+                <!-- Summary -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="alert alert-info">
+                            <i class="fa fa-info-circle"></i>
+                            <strong>Summary:</strong>
+                            Showing <t t-esc="pagination['per_page']"/> suppliers per page. 
+                            Total: <strong t-esc="pagination['total_suppliers']"/> suppliers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo> 

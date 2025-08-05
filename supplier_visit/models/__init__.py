@@ -1,0 +1,3 @@
+from . import supplier_visit
+from . import res_partner
+from . import purchase_order 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="supplier_visit_summary_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="supplier_visit.supplier_visit_summary_report_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="supplier_visit_summary_report_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Supplier Visit Summary</h2>
+                
+                <div class="row mt32 mb32">
+                    <div class="col-6">
+                        <strong>Report Period:</strong>
+                        <span t-esc="data['date_from']" t-options='{"widget": "date"}'/> - 
+                        <span t-esc="data['date_to']" t-options='{"widget": "date"}'/>
+                    </div>
+                    <div class="col-6">
+                        <strong>Supplier:</strong>
+                        <span t-esc="data['supplier_name']"/>
+                    </div>
+                </div>
+
+                <t t-set="visits" t-value="request.env['supplier.visit'].search([
+                    ('visit_date', '>=', data['date_from']),
+                    ('visit_date', '&lt;=', data['date_to']),
+                    ('supplier_id', '=', data['supplier_id']) if data['supplier_id'] else (1, '=', 1)
+                ], order='visit_date desc')"/>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Visit Reference</th>
+                            <th>Supplier</th>
+                            <th>Visit Date</th>
+                            <th>Visitor</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-if="visits">
+                            <t t-foreach="visits" t-as="visit">
+                                <tr>
+                                    <td><span t-esc="visit.name"/></td>
+                                    <td><span t-esc="visit.supplier_id.name"/></td>
+                                    <td><span t-esc="visit.visit_date" t-options='{"widget": "date"}'/></td>
+                                    <td><span t-esc="visit.visitor_id.name"/></td>
+                                    <td>
+                                        <span t-esc="visit.state" 
+                                              t-attf-class="badge badge-#{visit.state == 'draft' and 'secondary' or visit.state == 'confirmed' and 'warning' or 'success'}"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="visit.notes" t-if="visit.notes"/>
+                                        <span t-if="not visit.notes" class="text-muted">-</span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">
+                                    No visits found for the selected criteria.
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+                <div class="row mt32">
+                    <div class="col-12">
+                        <p class="text-muted">
+                            <strong>Total Visits:</strong> <span t-esc="len(visits)"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo> 

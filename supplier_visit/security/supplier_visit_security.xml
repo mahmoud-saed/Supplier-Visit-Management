@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- Supplier Visit User Group -->
+        <record id="group_supplier_visit_user" model="res.groups">
+            <field name="name">Supplier Visit User</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">Users who can create and manage supplier visits.</field>
+        </record>
+
+        <!-- Supplier Visit Manager Group -->
+        <record id="group_supplier_visit_manager" model="res.groups">
+            <field name="name">Supplier Visit Manager</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+            <field name="implied_ids" eval="[(4, ref('group_supplier_visit_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            <field name="comment">Users who have full access to supplier visit management.</field>
+        </record>
+
+        <!-- Record Rules -->
+        <!-- Note: Multi-company rule removed as supplier.visit model doesn't have company_id field -->
+
+    </data>
+</odoo> 

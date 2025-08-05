@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_supplier_visit_user,supplier.visit.user,model_supplier_visit,group_supplier_visit_user,1,1,1,0
+access_supplier_visit_manager,supplier.visit.manager,model_supplier_visit,group_supplier_visit_manager,1,1,1,1
+access_supplier_visit_report_wizard_user,supplier.visit.report.wizard.user,model_supplier_visit_report_wizard,group_supplier_visit_user,1,1,1,0
+access_supplier_visit_report_wizard_manager,supplier.visit.report.wizard.manager,model_supplier_visit_report_wizard,group_supplier_visit_manager,1,1,1,1

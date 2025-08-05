@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="supplier_visit_rating_widget">
+        <div class="o_supplier_rating_widget">
+            <div class="rating-display">
+                <span class="rating-label">Supplier Rating:</span>
+                <div class="rating-stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <span class="rating-text">3 out of 5 stars</span>
+            </div>
+        </div>
+    </t>
+</templates> 
