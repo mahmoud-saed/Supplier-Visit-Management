@@ -1,8 +1,8 @@
-# Supplier Visit Management Module
+# Supplier Visit Module
 
-A comprehensive Odoo module for managing supplier visits with tracking, reporting, and integration capabilities.
+This is the core Odoo module for supplier visit management. For project overview and installation instructions, see the [main README](../README.md).
 
-## Features
+## Module Features
 
 ### 1. Core Supplier Visit Management
 - **Model**: `supplier.visit`
@@ -56,14 +56,14 @@ A comprehensive Odoo module for managing supplier visits with tracking, reportin
 - **Custom JS Widget**: Mock supplier rating (1-5 stars) with random generation
 - **Email Templates**: Automated notifications for visit confirmations
 
-## Installation
+## Module Installation
 
-1. Copy the `supplier_visit` folder to your Odoo addons directory
+1. Copy this `supplier_visit` folder to your Odoo addons directory
 2. Update the addons list in Odoo
 3. Install the "Supplier Visit Management" module
 4. Assign users to appropriate security groups
 
-## Usage
+## Module Usage
 
 ### Creating a Supplier Visit
 1. Navigate to **Supplier Visits** menu
@@ -113,7 +113,7 @@ The module sends POST requests to external APIs when visits are confirmed. The p
 }
 ```
 
-## Customization
+## Module Customization
 
 ### Adding New Fields
 To add new fields to the supplier visit model, modify `models/supplier_visit.py` and update the corresponding views.
@@ -124,7 +124,7 @@ Change the API URL in the `_send_api_notification` method in `models/supplier_vi
 ### Customizing Reports
 Modify the QWeb templates in `report/supplier_visit_report_templates.xml` to customize the PDF report layout.
 
-## Troubleshooting
+## Module Troubleshooting
 
 ### Common Issues
 1. **Sequence not working**: Ensure the sequence data is properly loaded
@@ -136,4 +136,4 @@ Check Odoo logs for API integration errors and visit-related activities.
 
 ## Support
 
-For issues and questions, please refer to the module documentation or contact your system administrator. 
+For issues and questions, please refer to the main project documentation or contact your system administrator. 
